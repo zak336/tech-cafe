@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
   } catch (err: any) {
     console.error('Order creation error:', err)
     // Release slot if order creation failed after booking
-    await service.rpc('release_slot', { p_slot_id: slot_id }).catch(() => {})
+    await service.rpc('release_slot', { p_slot_id: slot_id }).match(() => {})
     return NextResponse.json({ error: err.message ?? 'Order creation failed' }, { status: 500 })
   }
 }
