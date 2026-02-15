@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans:    'DM Sans', system-ui, sans-serif;
+    --font-mono:    'DM Mono', monospace;
+    --font-display: 'Cormorant Garamond', serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0D0D0D;
+    color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: #161616; }
+  ::-webkit-scrollbar-thumb { background: #2E2E2E; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+  /* Selection */
+  ::selection { background: rgba(212,175,55,0.3); color: #fff; }
+}
+
+@layer components {
+  /* ── Buttons ── */
+  .btn-gold {
+    @apply bg-gold text-black font-semibold px-6 py-3 rounded-xl
+           hover:bg-gold-light active:bg-gold-dark
+           transition-all duration-200 disabled:opacity-40
+           disabled:cursor-not-allowed shadow-gold hover:shadow-gold-lg;
+  }
+
+  .btn-outline {
+    @apply border border-border text-white font-medium px-6 py-3 rounded-xl
+           hover:border-gold hover:text-gold
+           transition-all duration-200 disabled:opacity-40;
+  }
+
+  .btn-ghost {
+    @apply text-text-muted font-medium px-4 py-2 rounded-lg
+           hover:text-white hover:bg-surface-2
+           transition-all duration-200;
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-surface rounded-2xl border border-border shadow-card;
+  }
+
+  .card-hover {
+    @apply card hover:border-gold/40 transition-all duration-300 cursor-pointer;
+  }
+
+  /* ── Inputs ── */
+  .input {
+    @apply w-full bg-surface-2 border border-border rounded-xl px-4 py-3
+           text-white placeholder:text-text-muted
+           focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30
+           transition-all duration-200;
+  }
+
+  /* ── Badges ── */
+  .badge-veg {
+    @apply inline-flex items-center gap-1 text-xs font-medium
+           text-green-400 bg-green-400/10 px-2 py-0.5 rounded-md;
+  }
+
+  .badge-nonveg {
+    @apply inline-flex items-center gap-1 text-xs font-medium
+           text-red-400 bg-red-400/10 px-2 py-0.5 rounded-md;
+  }
+
+  /* ── Section heading ── */
+  .heading-display {
+    font-family: var(--font-display);
+    @apply text-4xl font-bold tracking-tight;
+  }
+
+  /* ── Gold divider ── */
+  .divider-gold {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent my-6;
+  }
+
+  /* ── Skeleton ── */
+  .skeleton {
+    @apply bg-surface-2 rounded-xl animate-pulse;
+  }
+
+  /* ── Page container ── */
+  .page-container {
+    @apply max-w-2xl mx-auto px-4 pb-24;
+  }
+}
+
+@layer utilities {
+  .text-gold     { color: #D4AF37; }
+  .bg-gold       { background-color: #D4AF37; }
+  .border-gold   { border-color: #D4AF37; }
+
+  .font-display  { font-family: var(--font-display); }
+
+  /* No scrollbar */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
