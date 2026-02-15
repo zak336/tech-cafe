@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import BannerSlider from '@/components/customer/BannerSlider'
 import CategoryTabs from '@/components/customer/CategoryTabs'
-import MenuGrid from '@/components/customer/MenuGrid'
+//import MenuGrid from '@/components/customer/MenuGrid'
 import SearchBar from '@/components/customer/SearchBar'
 
 export const revalidate = 60 // ISR every 60s

@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Plus, Minus, Heart, Clock } from 'lucide-react'
-import { MenuItem, Variant, AddOn, CartAddOn } from '@/types'
+import { Plus, Minus, Clock } from 'lucide-react'
+import { MenuItem, Variant,  CartAddOn } from '@/types'
 import { useCartStore } from '@/store/cart'
 import { cn, formatCurrency } from '@/lib/utils'
 import toast from 'react-hot-toast'
