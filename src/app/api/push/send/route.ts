@@ -2,18 +2,29 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import webpush from 'web-push'
 
-webpush.setVapidDetails(
-  process.env.VAPID_EMAIL!,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-)
-
 export async function POST(request: NextRequest) {
   const { user_id, title, body, data } = await request.json()
 
   if (!user_id || !title || !body) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
   }
+
+  if (
+    !process.env.VAPID_EMAIL ||
+    !process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ||
+    !process.env.VAPID_PRIVATE_KEY
+  ) {
+    return new Response(
+      JSON.stringify({ error: 'Push not configured yet' }),
+      { status: 500 }
+    )
+  }
+
+  webpush.setVapidDetails(
+    process.env.VAPID_EMAIL,
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
+  )
 
   const service = createServiceClient()
 
