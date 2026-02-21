@@ -16,6 +16,8 @@ import Script from "next/script";
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
   const items = useCartStore((s) => s.items);
   const subtotal = useCartStore((s) => s.subtotal());
   const cafeId = useCartStore((s) => s.cafeId);
@@ -35,6 +37,11 @@ export default function CheckoutPage() {
   const [slotsLoading, setSlotsLoading] = useState(true);
   const [slotsError, setSlotsError] = useState("");
   const [resolvedCafeId, setResolvedCafeId] = useState<string | null>(cafeId);
+
+  // Hydration fix: wait for client-side store to be ready
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const taxAmount = subtotal * 0.05;
   const totalAmount = subtotal - discount + taxAmount;
@@ -193,7 +200,7 @@ export default function CheckoutPage() {
     }
   }
 
-  if (items.length === 0) return null;
+  if (!isMounted || items.length === 0) return null;
 
   return (
     <>

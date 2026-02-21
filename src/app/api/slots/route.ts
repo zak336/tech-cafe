@@ -119,7 +119,8 @@ export async function GET(request: NextRequest) {
 
   if (debug) {
     console.log(`[DEBUG] Total fetched: ${slots?.length || 0}, After filtering: ${filtered.length}`)
+    return NextResponse.json({ data: filtered, debug: { total: slots?.length, filtered: filtered.length } })
   }
 
-  return NextResponse.json({ data: filtered, debug: debug ? { total: slots?.length, filtered: filtered.length } : undefined })
+  return NextResponse.json({ data: filtered })
 }
